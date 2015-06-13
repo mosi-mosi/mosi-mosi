@@ -8,6 +8,12 @@
   background transparent
   font-family: 'Avenir', 'Hiragino Kaku Gothic ProN', sans-serif;
 
+ul
+  list-style:none
+
+*::selection
+  background rgba(0, 0, 0, 0.1)
+
 html
   position absolute
   top 0
@@ -40,8 +46,7 @@ aside
   left 0
   bottom 0
   width 280px
-  background-image url('../assets/images/side-menu.png')
-  background-color rgba(255,255,255,0.18)
+  background-color rgba(255,255,255,0.16)
   background-size: 100%
 
 header
@@ -52,6 +57,10 @@ header
   right 0
   background-color rgba(0,0,0,0.0)
   padding-left 36px
+  background-image url('../assets/images/header-logo.png')
+  background-size 320px
+  background-position right center
+  background-repeat no-repeat
   h1
     line-height 72px
     font-weight 100
@@ -64,7 +73,7 @@ header
   left 280px
   bottom 0
   right 0
-  background-color rgba(255, 255, 255, 0.1)
+  background-color rgba(255, 255, 255, 0.0)
   margin 0px 36px 36px 36px
 
 a

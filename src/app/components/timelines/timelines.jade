@@ -1,5 +1,5 @@
 section.timelines(ng-controller="TimelinesCtrl")
-  .article.timeline(ng-repeat="tl in timelines")
+  article.timeline(ng-repeat="tl in timelines")
     article.timeline-thing(ng-repeat="thing in tl.things" ng-style="detectThingStyle(thing)")
       h1.timeline-title(ng-bind="thing.title")
   .line-current-time

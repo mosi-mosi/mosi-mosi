@@ -26,10 +26,17 @@ angular.module "mosimosi"
         tl = new Timeline(0)
         tl.addThing
           title: "test thing 1"
+          start: new Date("2015-06-13T01:15")
+          end: new Date("2015-06-13T02:30")
         tl.addThing
           title: "test thing 2"
+          start: new Date("2015-06-13T06:00")
+          end: new Date("2015-06-13T09:30")
         tl.addThing
           title: "test thing 3"
+          start: new Date("2015-06-13T13:15")
+          end: new Date("2015-06-13T16:30")
+
 
         @startingTime = start.getTime()
         @timelines.push tl

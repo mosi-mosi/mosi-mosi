@@ -1,6 +1,12 @@
 angular.module "mosimosi"
-  .directive "resizable", () ->
+  .directive "resizable", ($parse) ->
     $ = angular.element
+
+    calcDeltaStep = (delta, step) ->
+      if delta < 0
+        Math.ceil delta / step
+      else
+        Math.floor delta / step
 
     changeElementSize = (element, dir, delta, step) ->
       switch dir
@@ -16,11 +22,7 @@ angular.module "mosimosi"
           throw new Error("Unexpected direction: #{dir}")
 
     changeElementTop = (element, delta, step) ->
-      heightDelta =
-        if delta.y < 0
-          Math.ceil(delta.y / step) * step
-        else
-          Math.floor(delta.y / step) * step
+      heightDelta = calcDeltaStep(delta.y, step) * step
 
       return if parseInt(element.css("height")) - heightDelta < step
 
@@ -30,11 +32,7 @@ angular.module "mosimosi"
       return heightDelta != 0
 
     changeElementBottom = (element, delta, step) ->
-      heightDelta =
-        if delta.y < 0
-          Math.ceil(delta.y / step) * step
-        else
-          Math.floor(delta.y / step) * step
+      heightDelta = calcDeltaStep(delta.y, step) * step
 
       return if parseInt(element.css("height")) + heightDelta < step
 
@@ -48,10 +46,12 @@ angular.module "mosimosi"
       step: "@"
       resizeStart: "&"
       resizeEnd: "&"
+
     link: (scope, element, attrs) ->
       element.addClass "resizable"
       element.css "position", "relative" if element.css("position") == "static"
       directions = scope.directions
+      step = scope.step
 
       # append resize handlers
       handles = $()
@@ -64,6 +64,7 @@ angular.module "mosimosi"
         resizing: false
         direction: null
         basePos: null
+        originalSize: null
 
       $body = $("body")
 
@@ -76,6 +77,9 @@ angular.module "mosimosi"
           info.basePos =
             x: event.pageX
             y: event.pageY
+          info.originalSize =
+            width: parseInt element.css "width"
+            height: parseInt element.css "height"
 
           scope.resizeStart()
 
@@ -87,10 +91,8 @@ angular.module "mosimosi"
             x: event.pageX - info.basePos.x
             y: event.pageY - info.basePos.y
 
-          console.log delta
-
           # update the base position if the element is resized
-          if changeElementSize element, info.direction, delta, scope.step
+          if changeElementSize element, info.direction, delta, step
             info.basePos =
               x: event.pageX
               y: event.pageY
@@ -101,4 +103,8 @@ angular.module "mosimosi"
 
         scope.$apply () ->
           info.resizing = false
-          scope.resizeEnd()
+          scope.resizeEnd
+            info:
+              direction: info.direction
+              x: (parseInt(element.css "width") - info.originalSize.width) / step
+              y: (parseInt(element.css "height") - info.originalSize.height) / step

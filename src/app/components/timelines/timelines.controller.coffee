@@ -16,3 +16,10 @@ angular.module "mosimosi"
       start = Timelines.startingTime
       end = start + DAY
       return (time - start) / (end - start) * 100
+
+    $scope.resizeStart = (thing) ->
+      console.log thing
+
+    $scope.resizeEnd = (thing, info) ->
+      console.log thing
+      console.log info

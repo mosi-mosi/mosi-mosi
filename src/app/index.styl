@@ -1,3 +1,27 @@
+*
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  font-size 100%
+  vertical-align baseline
+  background transparent
+  font-family: 'Avenir', 'Hiragino Kaku Gothic ProN', sans-serif;
+
+ul
+  list-style:none
+
+*::selection
+  background rgba(0, 0, 0, 0.1)
+
+html
+  position absolute
+  top 0
+  left 0
+  bottom 0
+  right 0
+  overflow hidden
+
 .browsehappy
   margin 0.2em 0
   background #ccc
@@ -7,10 +31,60 @@
 
 body
   margin 0
+  position absolute
+  top 0
+  left 0
+  bottom 0
+  right 0
+  overflow hidden
+  background-image url('../assets/images/background.jpg')
+  background-size cover
 
+aside
+  position absolute
+  top 0
+  left 0
+  bottom 0
+  width 280px
+  background-color rgba(255,255,255,0.16)
+  background-size: 100%
+
+header
+  position absolute
+  top 0
+  left 280px
+  height 72px
+  right 0
+  background-color rgba(0,0,0,0.0)
+  padding-left 36px
+  background-image url('../assets/images/header-logo.png')
+  background-size 320px
+  background-position right center
+  background-repeat no-repeat
+  h1
+    line-height 72px
+    font-weight 100
+    font-size 22px
+    color white
+
+.timelines-wrapper
+  position absolute
+  top 72px
+  left 280px
+  bottom 0
+  right 0
+  background-color rgba(255, 255, 255, 0.0)
+  margin 0px 36px 36px 36px
 
 a
   text-decoration none
+
+.main-article
+  bottom: 0
+  left: 0
+  position: absolute
+  top: 0
+  right: 0
 
 
 

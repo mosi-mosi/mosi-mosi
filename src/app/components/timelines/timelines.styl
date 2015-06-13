@@ -1,0 +1,73 @@
+.timelines
+  position absolute
+  top 0
+  height 100%
+  left 0
+  width 320px
+  border-radius 6px
+  background-color rgba(255,255,255,1.0)
+  box-shadow 0 2px 4px rgba(0,0,0,0.1)
+  overflow-y scroll
+  overflow-x hidden
+  &::-webkit-scrollbar
+    width 8px
+    height 0
+    background-color rgba(0,0,0,0.0)
+  &::-webkit-scrollbar-track-piece
+    background-color rgba(255, 255, 255, 0)
+  &::-webkit-scrollbar-thumb
+    background rgba(0, 0, 0, 0.2)
+    border-radius 10px
+    box-shadow 0 0 0 2px #FFF inset
+
+.timelines-inner
+  height 1728px
+  position relative
+  width 100%
+
+.timeline
+  display inline-block
+  height 100%
+  position absolute
+  width 100%
+  background-image url('../assets/images/hour-back.png')
+
+.timeline-thing
+  border 2px solid #CDEBFE
+  left 30px
+  right 30px
+  border-radius 10px
+  overflow hidden
+  position absolute
+  box-sizing border-box
+
+  .thing-background
+    background-color rgba(120, 207, 148, 0.18)
+    display none
+    left 0
+    position absolute
+    right 0
+    top 0
+
+  &.current
+    border-color rgba(120, 207, 148, 0.62)
+
+    .thing-background
+      display block
+
+  &.done
+    background-color: rgba(120, 207, 148, 0.18)
+    border-color rgba(120, 207, 148, 0.62)
+
+  h1
+    color #999
+    font-weight 100
+    font-size 16px
+    padding 18px
+
+.line-current-time
+  background-color #ff8b61
+  height 1px
+  left 0
+  position absolute
+  right 0

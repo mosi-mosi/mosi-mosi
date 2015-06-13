@@ -15,4 +15,3 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         controller: "AuthCtrl"
 
     $urlRouterProvider.otherwise '/'
-

@@ -9,6 +9,10 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         url: "/bullets",
         templateUrl: "app/components/bullets/base.html",
         controller: "BulletsCtrl"
+      .state "auth",
+        url: "/auth",
+        templateUrl: "app/components/auth/login.html",
+        controller: "AuthCtrl"
 
     $urlRouterProvider.otherwise '/'
 

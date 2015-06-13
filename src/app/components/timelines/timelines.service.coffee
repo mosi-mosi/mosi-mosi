@@ -1,5 +1,5 @@
 angular.module "mosimosi"
-  .factory "Timelines", ->
+  .factory "Timelines", ($interval) ->
 
     # each timeline
     class Timeline
@@ -26,22 +26,24 @@ angular.module "mosimosi"
         tl = new Timeline(0)
         tl.addThing
           title: "test thing 1"
-          start: new Date("2015-06-13T01:15")
-          end: new Date("2015-06-13T02:30")
+          start: new Date(2015, 5, 14, 0, 0)
+          end: new Date(2015, 5, 14, 2, 30)
         tl.addThing
           title: "test thing 2"
-          start: new Date("2015-06-13T06:00")
-          end: new Date("2015-06-13T09:30")
+          start: new Date(2015, 5, 14, 6, 0)
+          end: new Date(2015, 5, 14, 9, 30)
         tl.addThing
           title: "test thing 3"
-          start: new Date("2015-06-13T13:15")
-          end: new Date("2015-06-13T16:30")
+          start: new Date(2015, 5, 14, 23, 0)
+          end: new Date(2015, 5, 14, 23, 45)
 
 
         @startingTime = start.getTime()
         @timelines.push tl
 
     # update the currentTime every minute
-    setInterval (() -> Timelines.currentTime = Date.now()), 60000
+    $interval () ->
+      Timelines.currentTime = Date.now()
+    , 60000
 
     return Timelines

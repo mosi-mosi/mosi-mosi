@@ -2,7 +2,7 @@ angular.module "mosimosi"
   .controller "TimelinesCtrl", ($scope, Timelines) ->
     DAY = 1000 * 60 * 60 * 24
 
-    Timelines.initTimelines 0, new Date("2015-06-13T00:00")
+    Timelines.initTimelines 0, new Date(2015, 5, 14)
 
     $scope.timelines = Timelines.timelines
 
@@ -11,6 +11,9 @@ angular.module "mosimosi"
 
       top: top + "%"
       height: (detectPosFromTime(thing.end.getTime()) - top) + "%"
+
+    $scope.detectCurrentTimeStyle = () ->
+      top: detectPosFromTime(Timelines.currentTime) + "%"
 
     detectPosFromTime = (time) ->
       start = Timelines.startingTime

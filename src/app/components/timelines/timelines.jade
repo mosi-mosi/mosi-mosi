@@ -1,16 +1,17 @@
 section.timelines(ng-controller="TimelinesCtrl")
-  article.timeline(ng-repeat="tl in timelines")
-    article.timeline-thing(
-        ng-repeat="thing in tl.things"
-        resizable 
-        directions="['top', 'bottom']" 
-        step="18"
-        resize-start="resizeStart(thing)"
-        resize-end="resizeEnd(thing, info)"
-        draggable
-        axis="y"
-        drag-start="dragStart(thing)"
-        drag-end="dragEnd(thing, info)"
-        ng-style="detectThingStyle(thing)")
-      h1.timeline-title(ng-bind="thing.title")
-  .line-current-time
+  div.timelines-inner
+    article.timeline(ng-repeat="tl in timelines")
+      article.timeline-thing(
+          ng-repeat="thing in tl.things"
+          resizable 
+          directions="['top', 'bottom']" 
+          step="18"
+          resize-start="resizeStart(thing)"
+          resize-end="resizeEnd(thing, info)"
+          draggable
+          axis="y"
+          drag-start="dragStart(thing)"
+          drag-end="dragEnd(thing, info)"
+          ng-style="detectThingStyle(thing)")
+        h1.timeline-title(ng-bind="thing.title")
+    .line-current-time(ng-style="detectCurrentTimeStyle()")

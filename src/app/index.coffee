@@ -1,4 +1,4 @@
-angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'firebase']
+angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'firebase', 'ui.keypress']
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state "home",
@@ -7,7 +7,7 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         controller: "MainCtrl"
       .state "bullets",
         url: "/bullets",
-        templateUrl: "app/components/bullets/bullets.html",
+        templateUrl: "app/components/bullets/base.html",
         controller: "BulletsCtrl"
 
     $urlRouterProvider.otherwise '/'

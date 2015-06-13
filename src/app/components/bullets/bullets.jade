@@ -1,2 +1,2 @@
 ul.bullets
-  li(ng-repeat="thing in things", ng-include="'app/components/bullets/bullet.html'")
+  li.bullet(ng-repeat='bullet in bullets | filter: thingFilter', ng-include="'app/components/bullets/bullet.html'")

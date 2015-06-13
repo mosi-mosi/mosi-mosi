@@ -1,8 +1,8 @@
 div.clock(ng-controller="ClockCtrl")
   div.analog-clock
-    div.hour-hand(style="transform:rotate({{hourHand}}deg)")
-    div.min-hand(style="transform:rotate({{minHand}}deg)")
-    div.sec-hand(style="transform:rotate({{secHand}}deg)")
+    div.hour-hand(style="transform:rotate({{hourHand}}deg);-webkit-transform:rotate({{hourHand}}deg)")
+    div.min-hand(style="transform:rotate({{minHand}}deg);-webkit-transform:rotate({{minHand}}deg)")
+    div.sec-hand(style="transform:rotate({{secHand}}deg);-webkit-transform:rotate({{secHand}}deg)")
     div.hand-cover
   div.digital-clock
     h2{{hour}} : {{min}} 

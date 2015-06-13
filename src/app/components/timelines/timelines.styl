@@ -31,6 +31,24 @@
   position absolute
   box-sizing border-box
 
+  .thing-background
+    background-color rgba(120, 207, 148, 0.18)
+    display none
+    left 0
+    position absolute
+    right 0
+    top 0
+
+  &.current
+    border-color rgba(120, 207, 148, 0.62)
+
+    .thing-background
+      display block
+
+  &.done
+    background-color: rgba(120, 207, 148, 0.18)
+    border-color rgba(120, 207, 148, 0.62)
+
   h1
     color #999
     font-weight 100

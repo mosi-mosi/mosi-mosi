@@ -2,6 +2,7 @@ section.timelines(ng-controller="TimelinesCtrl")
   div.timelines-inner
     article.timeline(ng-repeat="tl in timelines")
       article.timeline-thing(
+          ng-class="detectThingClass(thing)"
           ng-repeat="thing in tl.things"
           resizable 
           directions="['top', 'bottom']" 
@@ -13,5 +14,6 @@ section.timelines(ng-controller="TimelinesCtrl")
           drag-start="dragStart(thing)"
           drag-end="dragEnd(thing, info)"
           ng-style="detectThingStyle(thing)")
-        h1.timeline-title(ng-bind="thing.title")
+        .thing-background(ng-if="isCurrentThing(thing)" ng-style="{ height: detectThingBackHeight(thing) }")
+        h1.thing-title(ng-bind="thing.title")
     .line-current-time(ng-style="detectCurrentTimeStyle()")

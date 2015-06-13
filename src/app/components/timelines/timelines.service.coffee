@@ -34,8 +34,8 @@ angular.module "mosimosi"
           end: new Date(2015, 5, 14, 9, 30)
         tl.addThing
           title: "test thing 3"
-          start: new Date(2015, 5, 14, 23, 0)
-          end: new Date(2015, 5, 14, 23, 45)
+          start: new Date(2015, 5, 14, 11, 0)
+          end: new Date(2015, 5, 14, 13, 45)
 
 
         @startingTime = start.getTime()
@@ -43,7 +43,7 @@ angular.module "mosimosi"
 
     # update the currentTime every minute
     $interval () ->
-      Timelines.currentTime = Date.now()
-    , 60000
+      Timelines.currentTime += 60000
+    , 100
 
     return Timelines

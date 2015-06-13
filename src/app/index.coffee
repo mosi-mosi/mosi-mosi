@@ -7,4 +7,3 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         controller: "MainCtrl"
 
     $urlRouterProvider.otherwise '/'
-

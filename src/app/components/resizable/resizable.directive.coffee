@@ -24,7 +24,7 @@ angular.module "mosimosi"
     changeElementTop = (element, delta, step) ->
       heightDelta = calcDeltaStep(delta.y, step) * step
 
-      return if parseInt(element.css("height")) - heightDelta < step
+      return false if parseInt(element.css("height")) - heightDelta < step
 
       element.css
         height: "-=#{heightDelta}"
@@ -34,24 +34,22 @@ angular.module "mosimosi"
     changeElementBottom = (element, delta, step) ->
       heightDelta = calcDeltaStep(delta.y, step) * step
 
-      return if parseInt(element.css("height")) + heightDelta < step
+      return false if parseInt(element.css("height")) + heightDelta < step
 
       element.css
         height: "+=#{heightDelta}"
       return heightDelta != 0
 
     restrict: "A"
-    scope:
-      directions: "="
-      step: "@"
-      resizeStart: "&"
-      resizeEnd: "&"
+    scope: false
 
     link: (scope, element, attrs) ->
       element.addClass "resizable"
       element.css "position", "relative" if element.css("position") == "static"
-      directions = scope.directions
-      step = scope.step
+      directions = $parse(attrs.directions) scope
+      step = $parse(attrs.step) scope
+      resizeStart = $parse attrs.resizeStart
+      resizeEnd = $parse attrs.resizeEnd
 
       # append resize handlers
       handles = $()
@@ -81,7 +79,7 @@ angular.module "mosimosi"
             width: parseInt element.css "width"
             height: parseInt element.css "height"
 
-          scope.resizeStart()
+          resizeStart scope
 
       $body.on "mousemove", (event) ->
         return if !info.resizing
@@ -103,7 +101,7 @@ angular.module "mosimosi"
 
         scope.$apply () ->
           info.resizing = false
-          scope.resizeEnd
+          resizeEnd scope,
             info:
               direction: info.direction
               x: (parseInt(element.css "width") - info.originalSize.width) / step

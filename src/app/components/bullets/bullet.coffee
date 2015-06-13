@@ -1,49 +1,15 @@
 angular.module "mosimosi"
   .controller "BulletsCtrl", ($scope, bulletFactory, $firebaseObject, $firebaseArray, $q) ->
 
-    bullets = [
-      bulletFactory.newBullet([0], 'Developing with AngularJS', true, true),
-      bulletFactory.newBullet([1], 'Add sub tasks', false, true, [bulletFactory.newBullet([1, 0], 'Increase indent', false, true), bulletFactory.newBullet([1, 1], 'Decrease indent', false, true)]),
-      bulletFactory.newBullet([2], 'Add a shortcut to clean all complete tasks', false, false),
-      bulletFactory.newBullet([3], 'Add localStorage for saving tasks', false, false),
-      bulletFactory.newBullet([4], 'Add the possibility to navigate through tasks', false, false),
-      bulletFactory.newBullet([5], 'Add breadcrumb', false, false)
-    ]
+    ref = new Firebase("https://mosi-mosi.firebaseio.com/bullets")
 
-    $scope.bullets = bullets
-
-    # ref = new Firebase("https://mosi-mosi.firebaseio.com/things")
-
-    # # $scope.things = $firebaseObject(ref)
-    # $scope.things = $firebaseArray(ref)
-
-    # ###
-    # thing = {
-    #   $id: ""
-    #   subject: ""
-    #   parent: ""
-    # }
-    # ###
-
-    # $scope.things.$loaded((things)->
-
-    #   # console.log things
-
-    #   # もし、バレットがなければ空のバレットを追加
-    #   if things.length == 0
-    #     $scope.things.$add(
-    #       subject: ""
-    #     )
-    #   else
-    #     # $scope.things = $scope.things.filter (t) -> !!!t.parent
-
-    # )
-
-    # $scope.thingFilter = (element, index)->
-    #   # console.log element, index
-
-    #   return !!!element.parent
-
+    $scope.bullets = $firebaseArray(ref)
+    $scope.bullets.$loaded((bullets)->
+      # console.log bullets
+      # もし、バレットがなければ空のバレットを追加
+      if bullets.length == 0
+        $scope.bullets.$add(bulletFactory.newBullet([0], 'Developing with AngularJS', true, true, [], false))
+    )
 
     # $scope.subThings = (thing)->
     #   # query = ref.orderByChild("parent").equalTo(thing.$id)
@@ -105,6 +71,7 @@ angular.module "mosimosi"
     # $scope.expandHideBullets = ($event, thing)->
     #   console.log $event, thing
 
+  # Code from [](https://github.com/l-lin/bulletular)
 
   .factory 'bulletFactory', ->
     return {
@@ -191,7 +158,7 @@ angular.module "mosimosi"
         ), true
 
         scope.hasBullets = (bullet) ->
-          bullet.bullets.length > 0
+          bullet.bullets && bullet.bullets.length > 0
 
         scope.selectBullet = (indexes, step) ->
           indexesArray = addStepToIndex(indexes, step)
@@ -244,6 +211,7 @@ angular.module "mosimosi"
           previousIndex = index - 1
           previousBullet = bullets[previousIndex]
           if previousBullet
+            previousBullet.bullets ||= []
             # Push the bullet to the previous bullet sub bullets array
             previousBullet.bullets.push bullet
             # Remove the bullet from the origin bullets array

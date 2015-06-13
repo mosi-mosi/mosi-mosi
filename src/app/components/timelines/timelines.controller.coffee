@@ -23,3 +23,10 @@ angular.module "mosimosi"
     $scope.resizeEnd = (thing, info) ->
       console.log thing
       console.log info
+
+    $scope.dragStart = (thing) ->
+      console.log thing
+
+    $scope.dragEnd = (thing, info) ->
+      console.log thing
+      console.log info

@@ -7,6 +7,10 @@ section.timelines(ng-controller="TimelinesCtrl")
         step="18"
         resize-start="resizeStart(thing)"
         resize-end="resizeEnd(thing, info)"
+        draggable
+        axis="y"
+        drag-start="dragStart(thing)"
+        drag-end="dragEnd(thing, info)"
         ng-style="detectThingStyle(thing)")
       h1.timeline-title(ng-bind="thing.title")
   .line-current-time

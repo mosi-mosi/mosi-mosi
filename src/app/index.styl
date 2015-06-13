@@ -1,3 +1,20 @@
+*
+  margin 0
+  padding 0
+  border 0
+  outline 0
+  font-size 100%
+  vertical-align baseline
+  background transparent
+
+html
+  position absolute
+  top 0
+  left 0
+  bottom 0
+  right 0
+  overflow hidden
+
 .browsehappy
   margin 0.2em 0
   background #ccc
@@ -7,7 +24,31 @@
 
 body
   margin 0
+  position absolute
+  top 0
+  left 0
+  bottom 0
+  right 0
+  overflow hidden
+  background-image url('../assets/images/background.jpg')
+  background-size cover
 
+aside
+  position absolute
+  top 0
+  left 0
+  bottom 0
+  width 280px
+  background-image url('../assets/images/side-menu.png')
+  background-color rgba(255,255,255,0.18)
+  background-size: 100%;
+
+.timelines-wrapper
+  position absolute
+  top 0
+  left 280px
+  bottom 0
+  right 0
 
 a
   text-decoration none
@@ -19,8 +60,7 @@ a
   top: 0
   right: 0
 
-.timelines-wrapper
-  height: 100%
+
 
 
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject

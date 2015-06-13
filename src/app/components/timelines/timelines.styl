@@ -1,14 +1,36 @@
+section
+  border-radius 6px
+  overflow hidden
+  .section-inner
+    position absolute
+    top 60px
+    left 0
+    right 0
+    bottom 0px
+    overflow-y scroll
+    overflow-x hidden
+  header
+    position absolute
+    top 0
+    left 0
+    right 0
+    height 60px
+    background-color #FFF
+    box-shadow 0 2px 2px rgba(0,0,0,0.07)
+    h1
+      line-height 60px
+      text-align center
+      font-weight 100
+      color #666
+
 .timelines
   position absolute
   top 0
   height 100%
   left 0
   width 320px
-  border-radius 6px
   background-color rgba(255,255,255,1.0)
   box-shadow 0 2px 4px rgba(0,0,0,0.1)
-  overflow-y scroll
-  overflow-x hidden
   &::-webkit-scrollbar
     width 8px
     height 0
@@ -71,3 +93,28 @@
   left 0
   position absolute
   right 0
+
+.timer
+  position absolute
+  top 0
+  left 356px
+  height 240px
+  width 480px
+  background-color rgba(255,255,255,0.6)
+
+.list
+  position absolute
+  top 276px
+  left 356px
+  bottom 0px
+  width 480px
+  background-color #FFF
+
+.board
+  position absolute
+  top 0px
+  left 356px
+  left 872px
+  bottom 0
+  right 0
+  background-color rgba(255,255,255,0.6)

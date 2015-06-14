@@ -43,22 +43,16 @@ angular.module "mosimosi"
       console.log thing
 
     $scope.resizeEnd = (thing, info) ->
-      console.log thing
-      console.log info
       delta = info.y * STEP_TIME
       if info.direction == "top"
         thing.start.setTime(thing.start.getTime() - delta)
       else if info.direction == "bottom"
         thing.end.setTime(thing.end.getTime() + delta)
 
-      console.log thing
-
     $scope.dragStart = (thing) ->
       console.log thing
 
     $scope.dragEnd = (thing, info) ->
-      console.log thing
-      console.log info
       delta = info.x * STEP_TIME
       thing.start.setTime(thing.start.getTime() + delta)
       thing.end.setTime(thing.end.getTime() + delta)

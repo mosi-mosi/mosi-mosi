@@ -54,7 +54,7 @@ header.main-header
   top 0
   left 280px
   height 72px
-  right 0
+  right 40px
   background-color rgba(0,0,0,0.0)
   padding-left 36px
   background-image url('../assets/images/header-logo.png')
@@ -66,6 +66,19 @@ header.main-header
     font-weight 100
     font-size 22px
     color white
+
+a.github-button
+  position absolute
+  transition 0.1s linear
+  top 0
+  right 0
+  width 72px
+  height 72px
+  background-image url('../assets/images/git-hub-corner.png')
+  background-size 72px
+  cursor pointer
+  &:hover
+    background-image url('../assets/images/git-hub-corner-hover.png')
 
 .timelines-wrapper
   position absolute

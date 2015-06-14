@@ -12,7 +12,7 @@ angular.module "mosimosi"
             'uid': authData.uid
             'displayName': authData.facebook.displayName
             'id': authData.facebook.id
-            'picture': authData.facebook.cachedUserProfile.picture.data.url              
+            'picture': authData.facebook.cachedUserProfile.picture.data.url
           })
 
           console.log("Logged in as:", authData.uid)

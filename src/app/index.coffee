@@ -13,5 +13,9 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         url: "/auth",
         templateUrl: "app/components/auth/login.html",
         controller: "AuthCtrl"
+      .state "login",
+        url: "/login",
+        templateUrl: "app/components/login/login.html",
+        controller: "LoginCtrl"
 
     $urlRouterProvider.otherwise '/'

@@ -1,0 +1,44 @@
+.friends
+  position absolute
+  top 362px
+  bottom 36px
+  left 18px
+  right 18px
+  background-color rgba(0,0,0,0.0)
+  overflow-y scroll
+  border-radius 6px
+  &::-webkit-scrollbar
+    width 6px
+    height 0
+  &::-webkit-scrollbar-track-piece
+    background-color rgba(255, 255, 255, 0)
+  &::-webkit-scrollbar-thumb
+    background rgba(0, 0, 0, 0.16)
+    border-radius 10px
+
+li.friend
+  position relative
+  margin-bottom 12px
+  transition box-shadow 0.3s cubic-bezier(0, 0, 0.14, 0.85)
+  box-shadow 0 0 0 2px rgba(255,255,255,0.0) inset
+  border-radius 6px
+  &.active
+    background-color rgba(255,255,255,0.18)
+  &:hover
+    box-shadow 0 0 0 2px rgba(255,255,255,0.4) inset
+
+  img
+    position absolute
+    top 50%
+    margin-top -18px
+    left 14px
+    width 36px
+    height 36px
+    border-radius 18px
+    background-color rgba(255,255,255,0.18)
+  h3
+    line-height 54px
+    margin-left 64px
+    color #FFF
+    font-weight 100
+    font-size 15px

@@ -1,6 +1,6 @@
 div(ng-controller="TimelinesCtrl")
   section.timelines
-    header
+    header(ng-click="showModal()") open payment
     div.section-inner
       div.timelines-inner
         article.timeline(ng-repeat="tl in timelines")

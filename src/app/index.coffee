@@ -1,4 +1,4 @@
-angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'firebase', 'ui.keypress']
+angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'firebase', 'ui.keypress', 'braintree-angular']
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state "home",
@@ -13,5 +13,10 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         url: "/auth",
         templateUrl: "app/components/auth/login.html",
         controller: "AuthCtrl"
+
+      .state "payment",
+        url: "/payment",
+        templateUrl: "app/payment/payment.html",
+        controller: "PaymentCtrl"
 
     $urlRouterProvider.otherwise '/'

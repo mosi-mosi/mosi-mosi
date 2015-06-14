@@ -1,0 +1,10 @@
+.modal(ng-controller="PaymentCtrl" ng-show="$root.showPayment")
+  .modal--backdrop
+  .modal--content
+    .modal--close(ng-click="closeModal()") x
+    form(action="https://am9-api.herokuapp.com/buy-something" method="post")
+      h1 Buy AM9 Call.
+
+      braintree-dropin
+
+      input(type="submit" value="$30/month")

@@ -1,6 +1,7 @@
+a(href="https://github.com/mosi-mosi/mosi-mosi" target="_brank").github-button
 aside.aside-login
   h1 AM9.io
-  div.facebook-login-button
+  div(ng-include="'app/components/auth/login.html'" ng-controller="AuthCtrl")
   div.clock.login-clock
     div.analog-clock.login-analog-clock
       div.hour-hand(style="transform:rotate(270deg);-webkit-transform:rotate(270deg)")

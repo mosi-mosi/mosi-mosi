@@ -176,9 +176,6 @@ angular.module "mosimosi"
           index = newIndexes[newIndexes.length - 1]
           bulletUtils.checkArray bullets
           bullets.splice index, 0, bulletFactory.newBullet()
-
-          scope.$things.$add bulletFactory.newBullet()
-
           scope.selectBullet newIndexes
           $event.preventDefault()
 

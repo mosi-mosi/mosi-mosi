@@ -26,19 +26,10 @@ div(ng-controller="TimelinesCtrl")
       h1 Today's things
     div.section-inner
       ul
-        li
+        li(ng-repeat="thing in origThings")
           div.knob
-          input(type="text" value="Layout TableViewCell for FriendListVC")
-        li
-          div.knob
-          input(type="text" value="Design setting view")
-        li
-          div.knob
-          input(type="text" value="Connect API")
-        li
-          div.knob
-          input(type="text" value="Fix great bug")
-        li.add Add a new thing
+          input(type="text" ng-class="{ done: thing.done }" ng-model="thing.title")
+        li.add(ng-click="onClickAddThing()") Add a new thing
             
   section.board
     header

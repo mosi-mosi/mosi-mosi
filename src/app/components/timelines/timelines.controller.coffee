@@ -1,11 +1,12 @@
 angular.module "mosimosi"
-  .controller "TimelinesCtrl", ($scope, Timelines) ->
+  .controller "TimelinesCtrl", ($scope, Things, Timelines) ->
     DAY = 1000 * 60 * 60 * 24
     STEP_TIME = 1000 * 60 * 15 # 15 minutes
 
     Timelines.initTimelines 0, new Date(2015, 5, 14)
 
     $scope.timelines = Timelines.timelines
+    $scope.origThings = Things.things
 
     $scope.detectThingStyle = (thing) ->
       start = Timelines.startingTime
@@ -56,3 +57,6 @@ angular.module "mosimosi"
       delta = info.x * STEP_TIME
       thing.start.setTime(thing.start.getTime() + delta)
       thing.end.setTime(thing.end.getTime() + delta)
+
+    $scope.onClickAddThing = () ->
+      Things.add()

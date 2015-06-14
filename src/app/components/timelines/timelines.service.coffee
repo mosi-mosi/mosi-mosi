@@ -66,27 +66,11 @@ angular.module "mosimosi"
     Timelines =
       timelines: []
       startingTime: null
-      # DEBUG
       currentTime: Date.now()
 
       initTimelines: (users, start) ->
-        # FIXME: this is a mock
+        # FIXME: this is a dummy user
         tl = new Timeline(0, @currentTime)
-        tl.addThing
-          title: "test thing 2"
-          start: new Date(2015, 5, 14, 6, 0)
-          end: new Date(2015, 5, 14, 9, 30)
-          done: false
-        tl.addThing
-          title: "test thing 1"
-          start: new Date(2015, 5, 14, 0, 0)
-          end: new Date(2015, 5, 14, 2, 30)
-          done: false
-        tl.addThing
-          title: "test thing 3"
-          start: new Date(2015, 5, 14, 11, 0)
-          end: new Date(2015, 5, 14, 13, 45)
-          done: false
 
         @startingTime = start.getTime()
         @timelines.push tl

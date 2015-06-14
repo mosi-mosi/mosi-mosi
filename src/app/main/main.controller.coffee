@@ -1,3 +1,4 @@
 angular.module "mosimosi"
-  .controller "MainCtrl", ($scope) ->
-    
+  .controller "MainCtrl", ($scope, $rootScope) ->
+    $scope.showModal = ()->
+      $rootScope.showPayment = true

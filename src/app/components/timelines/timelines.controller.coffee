@@ -1,11 +1,12 @@
 angular.module "mosimosi"
-  .controller "TimelinesCtrl", ($scope, Timelines) ->
+  .controller "TimelinesCtrl", ($scope, Things, Timelines) ->
     DAY = 1000 * 60 * 60 * 24
     STEP_TIME = 1000 * 60 * 15 # 15 minutes
 
     Timelines.initTimelines 0, new Date(2015, 5, 14)
 
     $scope.timelines = Timelines.timelines
+    $scope.origThings = Things.things
 
     $scope.detectThingStyle = (thing) ->
       start = Timelines.startingTime
@@ -48,6 +49,7 @@ angular.module "mosimosi"
         thing.start.setTime(thing.start.getTime() - delta)
       else if info.direction == "bottom"
         thing.end.setTime(thing.end.getTime() + delta)
+      Timelines.timelines[0].updateThing thing
 
     $scope.dragStart = (thing) ->
       console.log thing
@@ -56,3 +58,16 @@ angular.module "mosimosi"
       delta = info.x * STEP_TIME
       thing.start.setTime(thing.start.getTime() + delta)
       thing.end.setTime(thing.end.getTime() + delta)
+      Timelines.timelines[0].updateThing thing
+
+    $scope.onClickAddThing = () ->
+      Things.add()
+
+    $scope.onClickMoveThing = (thing) ->
+      clone = thing.parameters()
+      clone.start = new Date(Timelines.startingTime)
+      clone.end = new Date(Timelines.startingTime + STEP_TIME * 4) # 1 hour
+      Timelines.timelines[0].addThing clone
+
+    $scope.onChangeThing = (thing) ->
+      Things.update thing

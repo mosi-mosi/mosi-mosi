@@ -1,5 +1,8 @@
 angular.module "mosimosi"
-  .factory "Timelines", ($interval) ->
+  .factory "Timelines", ($interval, Things) ->
+
+    Things.onUpdate = (thing) ->
+      Timelines.timelines[0].updateThing thing.parameters()
 
     # each timeline
     class Timeline
@@ -8,6 +11,8 @@ angular.module "mosimosi"
         @currentThing = null
 
       addThing: (newThing) ->
+        return if @things.some (thing) -> thing.id == newThing.id
+
         # sort the list of things
         for thing, index in @things
           if thing.start.getTime() > newThing.start.getTime()
@@ -17,12 +22,18 @@ angular.module "mosimosi"
         # append if the start time of new thing is more than all existing things
         @things.push newThing
 
+        @adjustThings()
+
       removeThing: (thingId) -> @things.splice @findThing(thingId), 1
 
       updateThing: (update) ->
-        for thing, index in @things
+        for thing in @things
           if update.id == thing.id
-            @things.splice index, 1, update
+            thing.title = update.title || thing.title
+            thing.done = update.done || thing.done
+            thing.start = update.start || thing.start
+            thing.end = update.end || thing.end
+            @adjustThings()
 
       findThing: (thingId) ->
         for thing in @things
@@ -50,7 +61,9 @@ angular.module "mosimosi"
 
       # prevent things to overlap each other
       adjustThings: () ->
-        for i in [0..@things.length - 2]
+        i = 0
+        ii = @things.length - 1
+        while (i < ii)
           target = @things[i]
           next = @things[i + 1]
 
@@ -60,33 +73,17 @@ angular.module "mosimosi"
             next.start.setTime(next.start.getTime() + delta)
             next.end.setTime(next.end.getTime() + delta)
 
-
+          ++i
 
     # the model managing all timelines
     Timelines =
       timelines: []
       startingTime: null
-      # DEBUG
       currentTime: Date.now()
 
       initTimelines: (users, start) ->
-        # FIXME: this is a mock
+        # FIXME: this is a dummy user
         tl = new Timeline(0, @currentTime)
-        tl.addThing
-          title: "test thing 2"
-          start: new Date(2015, 5, 14, 6, 0)
-          end: new Date(2015, 5, 14, 9, 30)
-          done: false
-        tl.addThing
-          title: "test thing 1"
-          start: new Date(2015, 5, 14, 0, 0)
-          end: new Date(2015, 5, 14, 2, 30)
-          done: false
-        tl.addThing
-          title: "test thing 3"
-          start: new Date(2015, 5, 14, 11, 0)
-          end: new Date(2015, 5, 14, 13, 45)
-          done: false
 
         @startingTime = start.getTime()
         @timelines.push tl

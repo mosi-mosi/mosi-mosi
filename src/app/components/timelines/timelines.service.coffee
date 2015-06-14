@@ -92,13 +92,11 @@ angular.module "mosimosi"
         @timelines.push tl
 
       updateCurrentTime: () ->
-        # DEBUG
-        @currentTime += 60000
+        @currentTime = Date.now()
         @timelines.forEach (timeline) =>
           timeline.updateTime @currentTime
 
     # update the currentTime every minute
-    # DEBUG
-    $interval Timelines.updateCurrentTime.bind(Timelines), 100
+    $interval Timelines.updateCurrentTime.bind(Timelines), 60000
 
     return Timelines

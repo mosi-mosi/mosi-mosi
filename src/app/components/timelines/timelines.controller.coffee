@@ -49,6 +49,7 @@ angular.module "mosimosi"
         thing.start.setTime(thing.start.getTime() - delta)
       else if info.direction == "bottom"
         thing.end.setTime(thing.end.getTime() + delta)
+      Timelines.timelines[0].updateThing thing
 
     $scope.dragStart = (thing) ->
       console.log thing
@@ -57,6 +58,16 @@ angular.module "mosimosi"
       delta = info.x * STEP_TIME
       thing.start.setTime(thing.start.getTime() + delta)
       thing.end.setTime(thing.end.getTime() + delta)
+      Timelines.timelines[0].updateThing thing
 
     $scope.onClickAddThing = () ->
       Things.add()
+
+    $scope.onClickMoveThing = (thing) ->
+      clone = thing.parameters()
+      clone.start = new Date(Timelines.startingTime)
+      clone.end = new Date(Timelines.startingTime + STEP_TIME * 4) # 1 hour
+      Timelines.timelines[0].addThing clone
+
+    $scope.onChangeThing = (thing) ->
+      Things.update thing

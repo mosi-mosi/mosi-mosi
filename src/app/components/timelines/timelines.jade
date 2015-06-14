@@ -27,8 +27,8 @@ div(ng-controller="TimelinesCtrl")
     div.section-inner
       ul
         li(ng-repeat="thing in origThings")
-          div.knob
-          input(type="text" ng-class="{ done: thing.done }" ng-model="thing.title")
+          div.knob(ng-click="onClickMoveThing(thing)")
+          input(type="text" ng-class="{ done: thing.done }" ng-model="thing.title" ng-change="onChangeThing(thing)")
         li.add(ng-click="onClickAddThing()") Add a new thing
             
   section.board

@@ -8,6 +8,7 @@ angular.module "mosimosi"
         @id = ++maxThingId
 
       parameters: () ->
+        id: @id
         title: @title
         done: @done
 
@@ -22,7 +23,7 @@ angular.module "mosimosi"
           if thing.id == update.id
             thing.title = update.title
             thing.done = update.done
-            onUpdate thing
+            @onUpdate thing
 
       findThing: (thingId) ->
         for thing in @things

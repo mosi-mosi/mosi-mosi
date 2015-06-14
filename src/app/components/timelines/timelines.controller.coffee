@@ -2,8 +2,13 @@ angular.module "mosimosi"
   .controller "TimelinesCtrl", ($scope, Things, Timelines) ->
     DAY = 1000 * 60 * 60 * 24
     STEP_TIME = 1000 * 60 * 15 # 15 minutes
+    TIMELINE_HEIGHT = 1728
 
-    Timelines.initTimelines 0, new Date(2015, 5, 14)
+    date = new Date()
+    date.setHours(0)
+    date.setMinutes(0)
+    date.setSeconds(0)
+    Timelines.initTimelines 0, date
 
     $scope.timelines = Timelines.timelines
     $scope.origThings = Things.things
@@ -11,22 +16,27 @@ angular.module "mosimosi"
     $scope.detectThingStyle = (thing) ->
       start = Timelines.startingTime
       end = start + DAY
-      top = calcTimeRetio thing.start.getTime(), start, end
+      top = TIMELINE_HEIGHT * calcTimeRetio(thing.start.getTime(), start, end)
+      height = TIMELINE_HEIGHT * calcTimeRetio(thing.end.getTime(), start, end) - top
 
-      top: top + "%"
-      height: (calcTimeRetio(thing.end.getTime(), start, end) - top) + "%"
+      return {
+        top: top + "px"
+        height: height + "px"
+      }
 
     $scope.detectCurrentTimeStyle = () ->
       start = Timelines.startingTime
       end = start + DAY
 
-      top: calcTimeRetio(Timelines.currentTime, start, end) + "%"
+      return {
+        top: TIMELINE_HEIGHT * calcTimeRetio(Timelines.currentTime, start, end) + "px"
+      }
 
     $scope.detectThingBackHeight = (thing) ->
-      calcTimeRetio(Timelines.currentTime, thing.start.getTime(), thing.end.getTime()) + "%"
+      calcTimeRetio(Timelines.currentTime, thing.start.getTime(), thing.end.getTime()) * 100 + "%"
 
 
-    calcTimeRetio = (time, start, end) -> (time - start) / (end - start) * 100
+    calcTimeRetio = (time, start, end) -> (time - start) / (end - start)
 
     $scope.detectThingClass = (thing) ->
       start = thing.start.getTime()
@@ -55,9 +65,10 @@ angular.module "mosimosi"
       console.log thing
 
     $scope.dragEnd = (thing, info) ->
-      delta = info.x * STEP_TIME
-      thing.start.setTime(thing.start.getTime() + delta)
-      thing.end.setTime(thing.end.getTime() + delta)
+      console.log info
+      delta = info.y * STEP_TIME
+      thing.start.setTime(thing.start.getTime() + delta + STEP_TIME)
+      thing.end.setTime(thing.end.getTime() + delta + STEP_TIME)
       Timelines.timelines[0].updateThing thing
 
     $scope.onClickAddThing = () ->

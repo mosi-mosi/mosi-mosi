@@ -1,5 +1,5 @@
 angular.module "mosimosi"
-  .factory "Timelines", ($interval, Things) ->
+  .factory "Timelines", ($rootScope, $interval, Things) ->
 
     Things.onUpdate = (thing) ->
       Timelines.timelines[0].updateThing thing.parameters()
@@ -17,6 +17,7 @@ angular.module "mosimosi"
         for thing, index in @things
           if thing.start.getTime() > newThing.start.getTime()
             @things.splice index, 0, newThing
+            @adjustThings()
             return
 
         # append if the start time of new thing is more than all existing things
@@ -33,7 +34,11 @@ angular.module "mosimosi"
             thing.done = update.done || thing.done
             thing.start = update.start || thing.start
             thing.end = update.end || thing.end
+
+            @things.sort (a, b) -> a.start.getTime() - b.start.getTime()
+
             @adjustThings()
+            return
 
       findThing: (thingId) ->
         for thing in @things

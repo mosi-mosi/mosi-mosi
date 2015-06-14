@@ -1,5 +1,5 @@
 angular.module "mosimosi"
-  .directive "draggable", ($parse, Draggable) ->
+  .directive "draggable", ($parse) ->
     $ = angular.element
 
     calcDeltaStep = (delta, step) ->
@@ -18,59 +18,60 @@ angular.module "mosimosi"
       element.css "top", "+=#{deltaTop}"
       return deltaTop != 0
 
-    restrict: "A"
-    scope: false
+    return {
+      restrict: "A"
+      scope: false
 
-    link: (scope, element, attrs) ->
-      element.addClass "draggable"
-      element.css "position", "relative" if element.css("position") == "static"
+      link: (scope, element, attrs) ->
+        element.addClass "draggable"
+        element.css "position", "relative" if element.css("position") == "static"
 
-      axis = attrs.axis
-      step = $parse(attrs.step)(scope) || 1
-      canMoveY = attrs.axis != "x"
-      canMoveX = attrs.axis != "y"
-      clone = $parse(attrs.clone)(scope)
-      dragStart = $parse attrs.dragStart
-      dragEnd = $parse attrs.dragEnd
-      $body = $("body")
+        axis = attrs.axis
+        step = $parse(attrs.step)(scope) || 1
+        canMoveY = axis != "x"
+        canMoveX = axis != "y"
+        dragStart = $parse attrs.dragStart
+        dragEnd = $parse attrs.dragEnd
+        $body = $("body")
 
-      element.on "mousedown", (event) ->
-        scope.$apply () ->
-          Draggable.dragging = true
-          Draggable.basePos =
-            x: event.pageX
-            y: event.pageY
-          Draggable.originalPos =
-            top: parseInt element.css "top"
-            left: parseInt element.css "left"
-          Draggable.el = element
+        info =
+          dragging: false
+          basePos: null
+          originalSize: null
 
-          Draggable.helper = if clone then element.clone().css("opacity", 0.7) else element
+        element.on "mousedown", (event) ->
+          scope.$apply () ->
+            info.dragging = true
+            info.basePos =
+              x: event.pageX
+              y: event.pageY
+            info.originalPos =
+              top: element.position().top
+              left: element.position().left
 
-          dragStart scope
+            dragStart scope
 
-      $body.on "mousemove", (event) ->
-        return if !Draggable.dragging
+        $body.on "mousemove", (event) ->
+          return if !info.dragging
 
-        scope.$apply () ->
-          delta =
-            x: event.pageX - Draggable.basePos.x
-            y: event.pageY - Draggable.basePos.y
+          scope.$apply () ->
+            delta =
+              x: event.pageX - info.basePos.x
+              y: event.pageY - info.basePos.y
 
-          if canMoveX && moveElementX Draggable.helper, delta.x, step
-            Draggable.basePos.x = event.pageX
+            if canMoveX && moveElementX element, delta.x, step
+              info.basePos.x = event.pageX
 
-          if canMoveY && moveElementY Draggable.helper, delta.y, step
-            Draggable.basePos.y = event.pageY
+            if canMoveY && moveElementY element, delta.y, step
+              info.basePos.y = event.pageY
 
-      $body.on "mouseup", (event) ->
-        return if !Draggable.dragging
+        $body.on "mouseup", (event) ->
+          return if !info.dragging
 
-        Draggable.helper.remove if clone
-
-        scope.$apply () ->
-          Draggable.dragging = false
-          dragEnd scope,
-            info:
-              x: (parseInt(element.css "top") - Draggable.originalPos.top) / step
-              y: (parseInt(element.css "left") - Draggable.originalPos.left) / step
+          scope.$apply () ->
+            info.dragging = false
+            dragEnd scope,
+              info:
+                x: (element.position().left - info.originalPos.left) / step
+                y: (element.position().top - info.originalPos.top) / step
+    }

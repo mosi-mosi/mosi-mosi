@@ -7,7 +7,7 @@ div(ng-controller="TimelinesCtrl")
         article.timeline(ng-repeat="tl in timelines")
           article.timeline-thing(
               ng-class="detectThingClass(thing)"
-              ng-repeat="thing in tl.things"
+              ng-repeat="thing in tl.things track by thing.id"
               resizable 
               directions="['top', 'bottom']" 
               step="18"

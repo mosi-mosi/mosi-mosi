@@ -30,13 +30,13 @@ angular.module "mosimosi"
       start = thing.start.getTime()
       end = thing.end.getTime()
 
-      return if end < Timelines.currentTime
+      return if end < Timelines.currentTime || thing.done
         "done"
       else if start < Timelines.currentTime
         "current"
 
     $scope.isCurrentThing = (thing) ->
-      thing.start.getTime() < Timelines.currentTime && Timelines.currentTime < thing.end.getTime()
+      thing.start.getTime() < Timelines.currentTime && Timelines.currentTime <= thing.end.getTime()
 
     $scope.resizeStart = (thing) ->
       console.log thing

@@ -17,6 +17,10 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         url: "/login",
         templateUrl: "app/components/login/login.html",
         controller: "LoginCtrl"
+      .state "information"
+        url: "/information"
+        templateUrl: "app/components/information/information.html",
+        controller: "InformationCtrl"
 
       .state "payment",
         url: "/payment",

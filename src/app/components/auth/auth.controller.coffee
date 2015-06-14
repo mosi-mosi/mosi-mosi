@@ -15,11 +15,11 @@ angular.module "mosimosi"
             'picture': authData.facebook.cachedUserProfile.picture.data.url
           })
 
-          # $state.go('home');
+          $state.go('home');
 
           console.log("Logged in as:", authData.uid)
         ).catch((error)->
+          
           alert("認証エラー");
-          console.log error
           console.log("Authentication failed:", error)
         )

@@ -13,7 +13,7 @@ angular.module 'mosimosi'
       $scope.day = dayList[date.getDay()]
 
       $scope.secHand = date.getSeconds() * 6
-      $scope.minHand = date.getMinutes() * 6 + $scope.secHand * 0.1
+      $scope.minHand = date.getMinutes() * 6 + $scope.secHand / 60
       $scope.hourHand = date.getHours() * 30 + $scope.minHand * 0.1
 
     displayTime()

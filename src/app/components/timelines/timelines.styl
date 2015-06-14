@@ -9,6 +9,16 @@ section
     bottom 0px
     overflow-y scroll
     overflow-x hidden
+    &::-webkit-scrollbar
+      width 8px
+      height 0
+      background-color rgba(0,0,0,0.0)
+    &::-webkit-scrollbar-track-piece
+      background-color rgba(255, 255, 255, 0)
+    &::-webkit-scrollbar-thumb
+      background rgba(0, 0, 0, 0.16)
+      border-radius 10px
+      box-shadow 0 0 0 2px #FFF inset
   header
     position absolute
     top 0
@@ -20,7 +30,7 @@ section
     h1
       line-height 60px
       text-align center
-      font-weight 100
+      font-weight 400
       color #666
 
 .timelines
@@ -31,16 +41,6 @@ section
   width 320px
   background-color rgba(255,255,255,1.0)
   box-shadow 0 2px 4px rgba(0,0,0,0.1)
-  &::-webkit-scrollbar
-    width 8px
-    height 0
-    background-color rgba(0,0,0,0.0)
-  &::-webkit-scrollbar-track-piece
-    background-color rgba(255, 255, 255, 0)
-  &::-webkit-scrollbar-thumb
-    background rgba(0, 0, 0, 0.16)
-    border-radius 10px
-    box-shadow 0 0 0 2px #FFF inset
 
 .timelines-inner
   height 1728px
@@ -48,6 +48,8 @@ section
   width 100%
 
 .timeline
+  margin-top 12px
+  margin-bottom 12px
   display inline-block
   height 100%
   position absolute
@@ -109,6 +111,55 @@ section
   bottom 0px
   width 480px
   background-color #FFF
+  ul
+    li
+      height 72px
+      position relative
+      transition 0.2s linear
+      &:after
+        content ""
+        position absolute
+        bottom 0
+        height 1px
+        left 10px
+        right 2px
+        background-color rgba(0,0,0,0.1)
+      &.add
+        cursor pointer
+        background-color rgba(0,0,0,0.0)
+        line-height 72px
+        text-align center
+        font-weight bold
+        color rgba(0,0,0,0.2)
+        &:hover
+          background-color rgba(0,0,0,0.04)
+
+
+      .knob
+        transition 0.2s linear
+        content ""
+        cursor pointer
+        position absolute
+        top 0
+        height 72px
+        right 2px
+        left 10px
+        background-image url('../assets/images/knob.png')
+        background-size 17px 15px
+        background-repeat no-repeat
+        background-position 21px center
+        &:hover
+          background-color rgba(0,0,0,0.04)
+      input[type="text"]
+        position absolute
+        left 70px
+        top 0px
+        width 400px
+        bottom 0px
+        color #666
+        font-size 16px
+        font-weight 100
+        padding 24px 0px
 
 .board
   position absolute

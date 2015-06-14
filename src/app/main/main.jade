@@ -1,9 +1,11 @@
 main.main-article
   aside
+    a.infomation-button(ui-sref="information")
     div.clock-wrapper(ng-include="'app/components/clock/clock.html'")
     div.friends-wrapper(ng-include="'app/components/friends/friends.html'")
   header.main-header
     h1 @keima
+  a(href="https://github.com/mosi-mosi/mosi-mosi" target="_brank").github-button
   div.timelines-wrapper(ng-include="'app/components/timelines/timelines.html'")
 
 .modal-wrapper(ng-include="'app/components/payment/payment.html'")

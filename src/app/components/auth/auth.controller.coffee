@@ -1,5 +1,5 @@
 angular.module "mosimosi"
-  .controller "AuthCtrl", ($scope, $firebaseAuth, $firebaseObject, $firebaseArray) ->
+  .controller "AuthCtrl", ($scope, $state, $firebaseAuth, $firebaseObject, $firebaseArray) ->
     ref = new Firebase("https://mosi-mosi.firebaseio.com")
     auth = $firebaseAuth(ref)
 
@@ -12,11 +12,14 @@ angular.module "mosimosi"
             'uid': authData.uid
             'displayName': authData.facebook.displayName
             'id': authData.facebook.id
-            'picture': authData.facebook.cachedUserProfile.picture.data.url              
+            'picture': authData.facebook.cachedUserProfile.picture.data.url
           })
+
+          # $state.go('home');
 
           console.log("Logged in as:", authData.uid)
         ).catch((error)->
+          alert("認証エラー");
           console.log error
           console.log("Authentication failed:", error)
         )

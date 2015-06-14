@@ -18,5 +18,5 @@ angular.module 'mosimosi'
 
     displayTime()
     setInterval ->
-        $scope.$apply(displayTime)
+      $scope.$apply(displayTime)
     , 100

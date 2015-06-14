@@ -13,6 +13,18 @@ angular.module 'mosimosi', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', '
         url: "/auth",
         templateUrl: "app/components/auth/login.html",
         controller: "AuthCtrl"
+      .state "login",
+        url: "/login",
+        templateUrl: "app/components/login/login.html",
+        controller: "LoginCtrl"
+      .state "information",
+        url: "/information",
+        templateUrl: "app/components/information/information.html",
+        controller: "InformationCtrl"
+      .state "architecture",
+        url: "/architecture",
+        templateUrl: "app/components/architecture/architecture.html",
+        controller: "ArchitectureCtrl"
 
       .state "payment",
         url: "/payment",
